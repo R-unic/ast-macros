@@ -10,12 +10,16 @@
   "keywords": ["roblox-ts", "extensions", "utilities", "ast", "macros"],
   "author": "runicly",
   "license": "ISC",
-  "description": "Some extensions and utilities for roblox-ts using AST macros ",
+  "description": "Some extensions and utilities for roblox-ts using AST macros",
   "types": "out/index.d.ts",
   "files": [
     "out",
     "!**/*.tsbuildinfo"
   ],
+  "repository": {
+    "url": "git+https://github.com/R-unic/ast-macros.git",
+    "type": "git"
+  },
   "publishConfig": {
     "access": "public"
   },
