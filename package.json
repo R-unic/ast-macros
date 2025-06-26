@@ -7,10 +7,10 @@
     "watch": "rbxtsc -w",
     "prepublishOnly": "npm run build"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": ["roblox-ts", "extensions", "utilities", "ast", "macros"],
+  "author": "runicly",
   "license": "ISC",
-  "description": "",
+  "description": "Some extensions and utilities for roblox-ts using AST macros ",
   "types": "out/index.d.ts",
   "files": [
     "out",
