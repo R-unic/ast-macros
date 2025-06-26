@@ -1,9 +1,9 @@
 import type ts from "typescript";
 
-import type { Identifier, MathMapping, NumberLiteral } from "../util";
+import type { Identifier, LibraryCall, NumberLiteral } from "../util";
 
 // arr.size()
-interface ArraySize<A> {
+export interface ArraySize<A> {
   kind: ts.SyntaxKind.CallExpression;
   arguments: [];
   expression: {
@@ -14,14 +14,14 @@ interface ArraySize<A> {
 }
 
 // arr[0]
-interface ArrayExtensions_First {
+export interface ArrayExtensions_First {
   kind: ts.SyntaxKind.ElementAccessExpression;
   expression: 0;
   argumentExpression: NumberLiteral<0>;
 }
 
 // arr[arr.size() - 1]
-interface ArrayExtensions_Last {
+export interface ArrayExtensions_Last {
   kind: ts.SyntaxKind.ElementAccessExpression;
   expression: 0;
   argumentExpression: {
@@ -33,7 +33,7 @@ interface ArrayExtensions_Last {
 }
 
 // [...new Set(arr)]
-interface ArrayExtensions_Distinct {
+export interface ArrayExtensions_Distinct {
   kind: ts.SyntaxKind.ArrayLiteralExpression;
   elements: [{
     kind: ts.SyntaxKind.SpreadElement;
@@ -46,23 +46,19 @@ interface ArrayExtensions_Distinct {
 }
 
 // arr[math.random(1, arr.size()) - 1]
-interface ArrayExtensions_Random {
+export interface ArrayExtensions_Random {
   kind: ts.SyntaxKind.ElementAccessExpression;
   expression: 0;
   argumentExpression: {
     kind: ts.SyntaxKind.BinaryExpression;
-    left: MathMapping<"random", [NumberLiteral<1>, ArraySize<0>]>;
+    left: LibraryCall<"math", "random", [NumberLiteral<1>, ArraySize<0>]>;
     operatorToken: ts.SyntaxKind.MinusToken;
     right: NumberLiteral<1>;
   };
 }
 
-
-
-
-
 declare global {
-  interface ReadonlyArray<T> {
+  export interface ReadonlyArray<T> {
     /**
      * Returns the first element of the array, or `undefined` if the array is empty.
      *
@@ -72,7 +68,7 @@ declare global {
      * [1, 2, 3].first(); // 1
      * [].first(); // undefined
      */
-    first(this: ReadonlyArray<T>): T | undefined;
+    first(this: ReadonlyArray<T>): this[0] | undefined;
 
     /**
      * Returns the last element of the array, or `undefined` if the array is empty.

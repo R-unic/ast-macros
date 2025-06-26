@@ -1,8 +1,8 @@
 import type ts from "typescript";
 
-import type { MathMapping } from "../util";
+import type { LibraryCall } from "../util";
 
-interface NumberExtensions_Sqrt {
+export interface NumberExtensions_Sqrt {
   kind: ts.SyntaxKind.BinaryExpression;
   left: 0;
   operatorToken: ts.SyntaxKind.AsteriskAsteriskToken;
@@ -12,14 +12,14 @@ interface NumberExtensions_Sqrt {
   };
 }
 
-type NumberExtensions_Floor = MathMapping<"floor", true>;
-type NumberExtensions_Ceil = MathMapping<"ceil", true>;
-type NumberExtensions_Round = MathMapping<"round", true>;
-type NumberExtensions_Abs = MathMapping<"abs", true>;
-type NumberExtensions_Map = MathMapping<"map", true>;
+export type NumberExtensions_Floor = LibraryCall<"math", "floor", true>;
+export type NumberExtensions_Ceil = LibraryCall<"math", "ceil", true>;
+export type NumberExtensions_Round = LibraryCall<"math", "round", true>;
+export type NumberExtensions_Abs = LibraryCall<"math", "abs", true>;
+export type NumberExtensions_Map = LibraryCall<"math", "map", true>;
 
 declare global {
-  interface Number {
+  export interface Number {
     /** @metadata ast-macro {@link NumberExtensions_Sqrt ast-macro-target} */
     sqrt(this: number): number;
     /** @metadata ast-macro {@link NumberExtensions_Floor ast-macro-target} */
