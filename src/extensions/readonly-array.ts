@@ -5,7 +5,6 @@ import type { Identifier, LibraryCall, NumberLiteral } from "../util";
 // arr.size()
 export interface ArraySize<A> {
   kind: ts.SyntaxKind.CallExpression;
-  arguments: [];
   expression: {
     kind: ts.SyntaxKind.PropertyAccessExpression;
     expression: A;
@@ -22,11 +21,15 @@ export interface ArrayExtensions_First {
 
 // arr[arr.size() - 1]
 export interface ArrayExtensions_Last {
+  $vars: {
+    _array: 0;
+  };
+
   kind: ts.SyntaxKind.ElementAccessExpression;
-  expression: 0;
+  expression: "_array";
   argumentExpression: {
     kind: ts.SyntaxKind.BinaryExpression;
-    left: ArraySize<0>;
+    left: ArraySize<"_array">;
     operatorToken: ts.SyntaxKind.MinusToken;
     right: NumberLiteral<1>;
   };
@@ -47,11 +50,15 @@ export interface ArrayExtensions_Distinct {
 
 // arr[math.random(1, arr.size()) - 1]
 export interface ArrayExtensions_Random {
+  $vars: {
+    _array: 0;
+  };
+
   kind: ts.SyntaxKind.ElementAccessExpression;
-  expression: 0;
+  expression: "_array";
   argumentExpression: {
     kind: ts.SyntaxKind.BinaryExpression;
-    left: LibraryCall<"math", "random", [NumberLiteral<1>, ArraySize<0>]>;
+    left: LibraryCall<"math", "random", [NumberLiteral<1>, ArraySize<"_array">]>;
     operatorToken: ts.SyntaxKind.MinusToken;
     right: NumberLiteral<1>;
   };

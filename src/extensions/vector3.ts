@@ -12,12 +12,15 @@ export type Vector3Extensions_DistanceFrom = LibraryCall<"vector", "magnitude", 
   };
 }]>
 
-type VectorXZ = LibraryCall<"vector", "create", [NumberLiteral<1>, NumberLiteral<0>, NumberLiteral<1>]>;
 export type Vector3Extensions_FlatDistanceFrom = LibraryCall<"vector", "magnitude", [{
+  $vars: {
+    XZ: LibraryCall<"vector", "create", [NumberLiteral<1>, NumberLiteral<0>, NumberLiteral<1>]>
+  };
+
   kind: ts.SyntaxKind.CallExpression;
   arguments: [{
     kind: ts.SyntaxKind.CallExpression;
-    arguments: [VectorXZ];
+    arguments: ["XZ"];
     expression: {
       kind: ts.SyntaxKind.PropertyAccessExpression;
       expression: 1;
@@ -28,7 +31,7 @@ export type Vector3Extensions_FlatDistanceFrom = LibraryCall<"vector", "magnitud
     kind: ts.SyntaxKind.PropertyAccessExpression;
     expression: {
       kind: ts.SyntaxKind.CallExpression;
-      arguments: [VectorXZ];
+      arguments: ["XZ"];
       expression: {
         kind: ts.SyntaxKind.PropertyAccessExpression;
         expression: 0;
